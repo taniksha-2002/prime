@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Prime Number</title>
+    <link rel="stylesheet" href="mystyle.css">
+    <style>
+    .center {
+    text-align: center;
+    }
+        body {
+  background-color: lightblue;
+}
+
+h1 {
+  color: navy;
+  margin-left: 20px;
+}
+    </style>
+</head>
+<body>
+<div class="center">
+<h1>Result</h1></div>
+<p><h2>The prime number between the range are:</h2></p>
+<h4><p th:text="${primeNumber.prime()}"></p></h4>
+</body>
+</html>

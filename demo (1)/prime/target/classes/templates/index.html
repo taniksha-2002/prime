@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>Prime</title>
+    <link rel="stylesheet" href="mystyle.css">
+    <style>
+        .center {
+        text-align: center;
+        font-size:40px;
+        }
+        label{
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        input[type=submit]:hover {
+            background-color: #45a049;
+            font-weight:bold}
+        input[type=number]: focus {
+             width: 100%;
+             padding: 12px 20px;
+             margin: 8px 0;}
+        .middle{
+            text-align:center;
+            margin-top: 120px;}
+
+        body {
+  background-color: lightblue;
+}
+
+h1 {
+  color: navy;
+  margin-left: 20px;
+}
+    </style>
+</head>
+<body>
+<div class="center">
+    <h1>Prime Number Finder</h1></div>
+    <form th:action="@{prime}" th:object="${PrimeNumber}" method="GET">
+        <div class="middle">
+    <h2><label for="startRange">Start Range:</label>
+    <input type="number" id="startRange" name="startRange" required><br></h2>
+
+    <h2><label for="endRange">End Range:</label>
+        <input type="number" id="endRange" name="endRange" required><br></h2>
+    <br>
+    <div>
+      <h2><input type="submit" onclick="getPrimeNumbers()" value="Generate Prime Numbers"></h2></div>
+    </div><br>
+
+        <div id ="result"></div>
+</form>
+<script>
+    <!--function testJQuery(){
+        if(window.jQuery){
+            console.log('jQuery is loaded!');
+            }
+        else{
+            console.log('Error: jQuery is not loaded.');
+            }
+        }-->
+    function getPrimeNumbers(){
+    var startRange=document.getElementById("startRange").value;
+    var endRange=document.getElementById("endRange").value;
+
+   fetch('api/prime?startRange=' + startRange + '&endRange=' + endRange)
+        .then(response => {
+            if(!response.ok) throw new Error('Network response was not ok');
+            return response.json();
+            })
+        .then(data => {
+            document.getElementById('result').innerHTML='<pre>' + JSON.stringify(data) + '<pre>';
+            })
+        .catch(error =>{
+            console.error('Error:', error);
+            alert('An error occurred. Please check your input and try again.');
+        });
+        <!--function displayResult(primes){
+        var resultDiv= document.getElementId("result");
+        resultDiv.innerHTMl = "<p> The prime numbers between range is: " + primes.join(', ') + "</p>";
+        }
+    }-->
+</script>
+</body>
+</html>
